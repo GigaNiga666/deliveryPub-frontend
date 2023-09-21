@@ -1,0 +1,141 @@
+.container {
+  padding: 10px;
+  width: 100%;
+}
+
+.header {
+  margin-bottom: 20px;
+  height: 30px;
+  display: none;
+
+  img {
+    height: 100%;
+  }
+}
+
+.products {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.buttonsProducts {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+.buttonProduct {
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 21px;
+  border: 1px #1F1F1F solid;
+  color: #1F1F1F;
+  padding: 5px 0;
+
+  &:hover {
+    background-color: #1F1F1F;
+    color: white;
+  }
+}
+
+.active {
+  background-color: #1F1F1F;
+  color: white;
+}
+
+.buttonIcon {
+  width: 24px;
+  height: 24px;
+  margin-left: -24px;
+}
+
+.navigation {
+  margin-bottom: 50px;
+
+  &List {
+    white-space: nowrap;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding-bottom: 27px;
+    height: 60px;
+  }
+  &Item {
+    text-align: center;
+    color: black;
+
+    &:first-child {
+      padding-left: 20px;
+    }
+    &:last-child {
+      padding-right: 20px;
+    }
+
+    button {
+      position: relative;
+    }
+  }
+  &ItemActive:after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background-color: black;
+  }
+}
+
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.search {
+  margin-bottom: 50px;
+}
+
+.searchWrapper {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 49px;
+    right: 0;
+    bottom: -10px;
+    background-color: #c5c5c5;
+    display: block;
+    height: 2px;
+  }
+}
+
+.searchIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.searchInput {
+  display: block;
+  position: relative;
+}
+
+.logo {
+  height: 30px;
+  margin-bottom: 20px;
+}
