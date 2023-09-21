@@ -13,17 +13,17 @@ interface AppProps {
 }
 
 async function fetchProducts() {
-    const {data} =  await axios.get('http://localhost:5000/api/getProducts')
+    const {data} =  await axios.get(`${import.meta.env.BACKEND_URL}/api/getProducts`)
     return data
-
-    // const { data , isLoading } = useQuery('products', fetchProducts, {refetchOnWindowFocus: false})
-
-    // if (isLoading) {
-    //     return (<span>Идёт загрузка...</span>)
-    // }
 }
 
 const App: FC<AppProps> = ({}) => {
+
+    const { data , isLoading } = useQuery('products', fetchProducts, {refetchOnWindowFocus: false})
+
+    if (isLoading) {
+        return (<span>Идёт загрузка...</span>)
+    }
 
     const [searchInput, setSearchInput] = useState<string>('')
     const [currentCategory, setCategory] = useState<string>('')
@@ -47,8 +47,6 @@ const App: FC<AppProps> = ({}) => {
         tg.MainButton.text = 'Корзина'
         tg.MainButton.onClick(clickOnMainBtn)
     }, [])
-
-    const data = getExampleData()
 
     const products =  data.products.filter(product => {
         const checkCategory = !currentCategory || product.category === currentCategory

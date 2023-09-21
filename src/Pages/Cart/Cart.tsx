@@ -19,7 +19,7 @@ const Cart: FC<CartProps> = ({}) => {
     const [cartState, setCartState] = useState<{product : IProduct, count : number}[]>(cart)
 
     async function invoice() {
-        const {data} = await axios.post<AxiosResponse<string>>('http://localhost:5000/api/getInvoiceLink')
+        const {data} = await axios.post<AxiosResponse<string>>(`${import.meta.env.BACKEND_URL}/api/getInvoiceLink`)
         tg.openInvoice(data)
     }
 

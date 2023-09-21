@@ -1,32 +1,26 @@
 import React, {FC, useEffect, useState} from 'react';
 import styles from './Product.module.scss'
-import {Link, Navigate, useNavigate, useParams} from "react-router-dom";
-import icons from '../../assets/icons/sprite.svg'
+import {useNavigate, useParams} from "react-router-dom";
 import {useQuery} from "react-query";
 import axios from "axios";
-import {getExampleData} from "../../heplers/getExampleData";
 import {useTelegram} from "../../hooks/useTelegram";
 import {useCart} from "../../hooks/useCart";
-import {IProduct} from "../../types/IProduct";
 
 const Product: FC = () => {
     const productId = useParams().id
     const {tg} = useTelegram()
     const navigate = useNavigate()
 
-    const product = getExampleData().products.find(product => product.id === Number(productId)) as IProduct
+    const { data : product, isLoading } = useQuery('product', async () => {
+        const {data} =  await axios.get(`${import.meta.env.BACKEND_URL}/getProduct/${productId}`)
+        return data
+    }, {refetchOnWindowFocus: false})
 
     const {cart, addFromCart, removeFromCart} = useCart()
     const amountInCart = cart.find(value => value.product.id === product.id)
     const [counter, setCounter] = useState<number>(!amountInCart ? 0 : amountInCart.count)
 
-
-    // const { data : product, isLoading } = useQuery('product', async () => {
-    //     const {data} =  await axios.get(`http://localhost:5000/api/getProduct/${productId}`)
-    //     return data
-    // }, {refetchOnWindowFocus: false})
-    //
-    // if (isLoading) return (<span>Идёт загрузка</span>)
+    if (isLoading) return (<span>Идёт загрузка</span>)
 
     useEffect(() => {
         tg.BackButton.show()
