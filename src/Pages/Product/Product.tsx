@@ -12,7 +12,7 @@ const Product: FC = () => {
     const navigate = useNavigate()
 
     const { data : product, isLoading } = useQuery('product', async () => {
-        const {data} =  await axios.get(`https://deliverypub-backend.onrender.com//api/getProduct/${productId}`)
+        const {data} =  await axios.get(`https://deliverypub-backend.onrender.com/api/getProduct/${productId}`)
         return data
     }, {refetchOnWindowFocus: false})
 
