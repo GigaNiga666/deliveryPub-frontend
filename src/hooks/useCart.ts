@@ -1,8 +1,6 @@
 import {IProduct} from "../types/IProduct";
 import {useTelegram} from "./useTelegram";
-import {getExampleData} from "../heplers/getExampleData";
 
-// const cart : {product : IProduct, count : number}[] = [{product :getExampleData().products[0], count: 3}, {product :getExampleData().products[1], count: 2}]
 const cart : {product : IProduct, count : number}[] = []
 
 export function useCart() {
@@ -20,9 +18,9 @@ export function useCart() {
     function removeFromCart(id : number) {
         const currentOrder = cart.find(order => order.product.id === id)
 
-        currentOrder.count--
+        if (currentOrder) currentOrder.count--
 
-        if (currentOrder.count === 0)
+        if (currentOrder?.count === 0)
             cart.splice(cart.indexOf(currentOrder), 1)
 
         if (!cart.length) tg.MainButton.hide()

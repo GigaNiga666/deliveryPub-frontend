@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styles from './Cart.module.scss'
 import {useCart} from "../../hooks/useCart";
 import {OrderCard} from "../../components/OrderCard/OrderCard";
@@ -19,7 +19,9 @@ const Cart: FC<CartProps> = ({}) => {
     const [cartState, setCartState] = useState<{product : IProduct, count : number}[]>(cart)
 
     async function invoice() {
+        //@ts-ignore
         const {data} = await axios.post<AxiosResponse<string>>(`https://deliverypub-backend.onrender.com/api/getInvoiceLink`)
+        //@ts-ignore
         tg.openInvoice(data)
     }
 

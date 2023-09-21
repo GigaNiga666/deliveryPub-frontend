@@ -62,7 +62,7 @@ export declare namespace TelegramWebApps {
         showAlert(message : any) : void;
         sendData(data: any): void;
 
-        openInvoice(url : string);
+        openInvoice(url : string) : void;
         /**
          * A method that informs the Telegram app that the Web App is ready to be displayed.
          */

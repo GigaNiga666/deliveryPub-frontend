@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styles from './Product.module.scss'
 import {useNavigate, useParams} from "react-router-dom";
 import {useQuery} from "react-query";

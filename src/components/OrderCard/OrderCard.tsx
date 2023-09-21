@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import {FC, useState} from 'react';
 import styles from './OrderCard.module.scss'
 import {IProduct} from "../../types/IProduct";
 import {useCart} from "../../hooks/useCart";

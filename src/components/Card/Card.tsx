@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import styles from './Card.module.scss'
 import {Link} from "react-router-dom";
 import {IProduct} from "../../types/IProduct";

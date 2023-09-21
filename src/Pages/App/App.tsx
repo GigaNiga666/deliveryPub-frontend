@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styles from './App.module.scss'
 import logo from '../../assets/Logo_B.svg'
 import sprite from '../../assets/icons/sprite.svg'
@@ -47,6 +47,7 @@ const App: FC<AppProps> = ({}) => {
         tg.MainButton.onClick(clickOnMainBtn)
     }, [])
 
+    //@ts-ignore
     const products =  data.products.filter(product => {
         const checkCategory = !currentCategory || product.category === currentCategory
         const checkClass = product.class === currentClass
@@ -98,6 +99,7 @@ const App: FC<AppProps> = ({}) => {
                         <button onClick={() => setCategory('')} className={!currentCategory ? styles.navigationItemActive : ''}>Все</button>
                     </li>
                     {
+                        //@ts-ignore
                         data.categories.map(category => (
                             <li key={category.id} className={styles.navigationItem}>
                                 <button
@@ -115,6 +117,7 @@ const App: FC<AppProps> = ({}) => {
                 <ul className={styles.cardList}>
                     {
                         !products.length ? <span>Ничего не удалось найти по вашему запросу :(</span> :
+                            //@ts-ignore
                             products.map(product =>
                                 <Card key={product.id} product={product}/>
                             )
