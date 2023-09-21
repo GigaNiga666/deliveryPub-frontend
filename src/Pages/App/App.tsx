@@ -5,7 +5,6 @@ import sprite from '../../assets/icons/sprite.svg'
 import {Card} from "../../components/Card/Card";
 import {useQuery} from "react-query";
 import axios from "axios";
-import {getExampleData} from "../../heplers/getExampleData";
 import {useTelegram} from "../../hooks/useTelegram";
 import {useNavigate} from "react-router-dom";
 
@@ -13,7 +12,7 @@ interface AppProps {
 }
 
 async function fetchProducts() {
-    const {data} =  await axios.get(`${import.meta.env.BACKEND_URL}/api/getProducts`)
+    const {data} =  await axios.get(`https://deliverypub-backend.onrender.com/api/getProducts`)
     return data
 }
 
@@ -28,7 +27,7 @@ const App: FC<AppProps> = ({}) => {
     const [searchInput, setSearchInput] = useState<string>('')
     const [currentCategory, setCategory] = useState<string>('')
     const [currentClass, setCurrentClass] = useState<string>('Пиво')
-    const {tg, user} = useTelegram()
+    const {tg} = useTelegram()
     const navigate = useNavigate()
 
     tg.onEvent('viewportChanged', () => {
