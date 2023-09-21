@@ -12,7 +12,7 @@ interface AppProps {
 }
 
 async function fetchProducts() {
-    const {data} =  await axios.get(`https://deliverypub-backend.onrender.com/getProduct`)
+    const {data} =  await axios.get(`https://deliverypub-backend.onrender.com/api/getProducts`)
     return data
 }
 
