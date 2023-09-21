@@ -12,7 +12,7 @@ interface AppProps {
 }
 
 async function fetchProducts() {
-    const {data} =  await axios.get(`https://deliverypub-backend.onrender.com/api/getProducts`)
+    const {data} =  await axios.get(`https://deliverypub-backend.onrender.com/getProduct`)
     return data
 }
 
@@ -20,9 +20,6 @@ const App: FC<AppProps> = ({}) => {
 
     const { data , isLoading } = useQuery('products', fetchProducts, {refetchOnWindowFocus: false})
 
-    if (isLoading) {
-        return (<span>Идёт загрузка...</span>)
-    }
 
     const [searchInput, setSearchInput] = useState<string>('')
     const [currentCategory, setCategory] = useState<string>('')
@@ -48,12 +45,16 @@ const App: FC<AppProps> = ({}) => {
     }, [])
 
     //@ts-ignore
-    const products =  data.products.filter(product => {
+    const products = data?.products?.filter(product => {
         const checkCategory = !currentCategory || product.category === currentCategory
         const checkClass = product.class === currentClass
 
         return searchInput === '' ? checkCategory && checkClass : checkCategory && checkClass && product.title.toLowerCase().includes(searchInput.toLowerCase())
     })
+
+    if (isLoading) {
+        return (<span>Идёт загрузка...</span>)
+    }
 
     return (
         <div className={styles.main}>

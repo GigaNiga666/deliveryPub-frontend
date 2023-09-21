@@ -20,8 +20,6 @@ const Product: FC = () => {
     const amountInCart = cart.find(value => value.product.id === product.id)
     const [counter, setCounter] = useState<number>(!amountInCart ? 0 : amountInCart.count)
 
-    if (isLoading) return (<span>Идёт загрузка</span>)
-
     useEffect(() => {
         tg.BackButton.show()
         tg.BackButton.onClick(() => {
@@ -34,6 +32,8 @@ const Product: FC = () => {
         setCounter(prev => prev === 0 && value === -1 ? 0 : prev + value)
         value === 1 ? addFromCart(product) : removeFromCart(product.id)
     }
+
+    if (isLoading) return (<span>Идёт загрузка</span>)
 
     return (
         <div className={styles.product}>
