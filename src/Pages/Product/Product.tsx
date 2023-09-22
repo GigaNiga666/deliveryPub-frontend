@@ -16,6 +16,8 @@ const Product: FC = () => {
         return data
     }, {refetchOnWindowFocus: false})
 
+    if (isLoading) return (<span>Идёт загрузка</span>)
+
     const {cart, addFromCart, removeFromCart} = useCart()
     const amountInCart = cart.find(value => value.product.id === product.id)
     const [counter, setCounter] = useState<number>(!amountInCart ? 0 : amountInCart.count)
@@ -33,8 +35,6 @@ const Product: FC = () => {
         setCounter(prev => prev === 0 && value === -1 ? 0 : prev + value)
         value === 1 ? addFromCart(product) : removeFromCart(product.id)
     }
-
-    if (isLoading) return (<span>Идёт загрузка</span>)
 
     return (
         <div className={styles.product}>
