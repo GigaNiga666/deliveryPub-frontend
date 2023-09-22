@@ -19,10 +19,12 @@ const Cart: FC<CartProps> = ({}) => {
     const [cartState, setCartState] = useState<{product : IProduct, count : number}[]>(cart)
 
     async function invoice() {
+        tg.MainButton.disable()
         //@ts-ignore
         const {data} = await axios.post<AxiosResponse<string>>(`${import.meta.env.VITE_BACKEND_URL}/api/getInvoiceLink`)
+        tg.MainButton.enable()
         //@ts-ignore
-        tg.openInvoice(data)
+        await tg.openInvoice(data)
     }
 
     useEffect(() => {
