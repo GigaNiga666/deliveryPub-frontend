@@ -34,11 +34,12 @@ const App = ({}) => {
         tg.MainButton.onClick(clickOnMainBtn)
     }, [])
 
-    if (!response)
-        return (<span>Данные по какой-то причине отсутствуют</span>)
 
     if (isLoading)
         return (<span>Идёт загрузка...</span>)
+
+    if (!response)
+        return (<span>Данные по какой-то причине отсутствуют</span>)
 
     const products = response.data.products.filter(product => {
         const checkCategory = !currentCategory || product.category === currentCategory
