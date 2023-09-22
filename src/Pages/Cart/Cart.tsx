@@ -1,16 +1,13 @@
-import {FC, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import styles from './Cart.module.scss'
 import {useCart} from "../../hooks/useCart";
 import {OrderCard} from "../../components/OrderCard/OrderCard";
 import {useTelegram} from "../../hooks/useTelegram";
 import {useNavigate} from "react-router-dom";
 import {IProduct} from "../../types/IProduct";
-import axios, {AxiosResponse} from "axios";
+import {Service} from "../../services/Service";
 
-interface CartProps {
-}
-
-const Cart: FC<CartProps> = ({}) => {
+const Cart = ({}) => {
 
     const {cart} = useCart()
     const {tg} = useTelegram()
@@ -20,11 +17,9 @@ const Cart: FC<CartProps> = ({}) => {
 
     async function invoice() {
         tg.MainButton.disable()
-        //@ts-ignore
-        const {data} = await axios.post<AxiosResponse<string>>(`${import.meta.env.VITE_BACKEND_URL}/api/getInvoiceLink`)
+        const link = await Service.getInvoiceLink()
         tg.MainButton.enable()
-        //@ts-ignore
-        await tg.openInvoice(data)
+        await tg.openInvoice(link)
     }
 
     useEffect(() => {
@@ -34,9 +29,7 @@ const Cart: FC<CartProps> = ({}) => {
             tg.BackButton.hide()
             tg.MainButton.offClick(invoice)
         })
-        tg.MainButton.disable()
         tg.MainButton.onClick(invoice)
-        tg.MainButton.enable()
     }, [])
 
     useEffect(() => {

@@ -2,20 +2,16 @@ import {FC, useEffect, useState} from 'react';
 import styles from './Product.module.scss'
 import {useNavigate, useParams} from "react-router-dom";
 import {useQuery} from "react-query";
-import axios from "axios";
 import {useTelegram} from "../../hooks/useTelegram";
 import {useCart} from "../../hooks/useCart";
+import {Service} from "../../services/Service";
 
 const Product: FC = () => {
     const productId = useParams().id
     const {tg} = useTelegram()
     const navigate = useNavigate()
 
-    const { data : product, isLoading } = useQuery(['product', productId], async () => {
-        const {data} =  await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/getProduct/${productId}`)
-        return data
-    }, {refetchOnWindowFocus: false})
-
+    const { data : response, isLoading } = useQuery(['product', productId], () => Service.getProduct(Number(productId)), {refetchOnWindowFocus: false})
 
     const {cart, addFromCart, removeFromCart} = useCart()
     const amountInCart = cart.find(value => value.product.id === Number(productId))
@@ -31,6 +27,9 @@ const Product: FC = () => {
     }, [])
 
     if (isLoading) return (<span>Идёт загрузка</span>)
+    if (!response) return (<span>Данные по неизвестной причине отсутствуют</span>)
+
+    const product = response.data
 
     function counterClick(value : number) {
         setCounter(prev => prev === 0 && value === -1 ? 0 : prev + value)

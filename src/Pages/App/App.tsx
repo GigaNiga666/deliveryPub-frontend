@@ -1,24 +1,15 @@
-import {FC, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import styles from './App.module.scss'
 import logo from '../../assets/Logo_B.svg'
 import sprite from '../../assets/icons/sprite.svg'
 import {Card} from "../../components/Card/Card";
 import {useQuery} from "react-query";
-import axios from "axios";
 import {useTelegram} from "../../hooks/useTelegram";
 import {useNavigate} from "react-router-dom";
+import {Service} from "../../services/Service";
 
-interface AppProps {
-}
-
-async function fetchProducts() {
-    const {data} =  await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/getProducts`)
-    return data
-}
-
-const App: FC<AppProps> = ({}) => {
-    const { data , isLoading } = useQuery('products', fetchProducts, {refetchOnWindowFocus: false})
-
+const App = ({}) => {
+    const { data : response , isLoading } = useQuery('products', () => Service.getAllProducts(), {refetchOnWindowFocus: false})
 
     const [searchInput, setSearchInput] = useState<string>('')
     const [currentCategory, setCategory] = useState<string>('')
@@ -43,17 +34,18 @@ const App: FC<AppProps> = ({}) => {
         tg.MainButton.onClick(clickOnMainBtn)
     }, [])
 
-    //@ts-ignore
-    const products = data?.products?.filter(product => {
+    if (!response)
+        return (<span>Данные по какой-то причине отсутствуют</span>)
+
+    if (isLoading)
+        return (<span>Идёт загрузка...</span>)
+
+    const products = response.data.products.filter(product => {
         const checkCategory = !currentCategory || product.category === currentCategory
         const checkClass = product.class === currentClass
 
         return searchInput === '' ? checkCategory && checkClass : checkCategory && checkClass && product.title.toLowerCase().includes(searchInput.toLowerCase())
     })
-
-    if (isLoading) {
-        return (<span>Идёт загрузка...</span>)
-    }
 
     return (
         <div className={styles.main}>
@@ -99,8 +91,7 @@ const App: FC<AppProps> = ({}) => {
                         <button onClick={() => setCategory('')} className={!currentCategory ? styles.navigationItemActive : ''}>Все</button>
                     </li>
                     {
-                        //@ts-ignore
-                        data.categories.map(category => (
+                        response.data.categories.map(category => (
                             <li key={category.id} className={styles.navigationItem}>
                                 <button
                                     onClick={() => setCategory(category.category_title)}
@@ -117,7 +108,6 @@ const App: FC<AppProps> = ({}) => {
                 <ul className={styles.cardList}>
                     {
                         !products.length ? <span>Ничего не удалось найти по вашему запросу :(</span> :
-                            //@ts-ignore
                             products.map(product =>
                                 <Card key={product.id} product={product}/>
                             )
