@@ -16,7 +16,7 @@ const Cart = ({}) => {
     const [cartState, setCartState] = useState<{product : IProduct, count : number}[]>(cart)
 
     async function invoice() {
-        const products = [];
+        const products : {label : string, price : number}[] = [];
 
         cart.forEach(order => {
             products.push({label : order.product.title, price : order.product.price * order.count * 100})
