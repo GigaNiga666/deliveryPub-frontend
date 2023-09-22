@@ -20,9 +20,8 @@ const Product: FC = () => {
     const amountInCart = cart.find(value => value.product.id === product.id)
     const [counter, setCounter] = useState<number>(!amountInCart ? 0 : amountInCart.count)
 
-    if (amountInCart && amountInCart.count !== counter) setCounter(amountInCart.count)
-
     useEffect(() => {
+        if (amountInCart) setCounter(amountInCart.count)
         tg.BackButton.show()
         tg.BackButton.onClick(() => {
             navigate('/')
