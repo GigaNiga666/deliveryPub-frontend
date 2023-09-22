@@ -11,7 +11,7 @@ const Product: FC = () => {
     const {tg} = useTelegram()
     const navigate = useNavigate()
 
-    const { data : product, isLoading } = useQuery(`product${productId && ''}`, async () => {
+    const { data : product, isLoading } = useQuery(['product', productId], async () => {
         const {data} =  await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/getProduct/${productId}`)
         return data
     }, {refetchOnWindowFocus: false})
