@@ -20,7 +20,7 @@ const Cart: FC<CartProps> = ({}) => {
 
     async function invoice() {
         //@ts-ignore
-        const {data} = await axios.post<AxiosResponse<string>>(`https://deliverypub-backend.onrender.com/api/getInvoiceLink`)
+        const {data} = await axios.post<AxiosResponse<string>>(`${import.meta.env.VITE_BACKEND_URL}/api/getInvoiceLink`)
         //@ts-ignore
         tg.openInvoice(data)
     }

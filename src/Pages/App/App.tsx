@@ -12,12 +12,11 @@ interface AppProps {
 }
 
 async function fetchProducts() {
-    const {data} =  await axios.get(`https://deliverypub-backend.onrender.com/api/getProducts`)
+    const {data} =  await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/getProducts`)
     return data
 }
 
 const App: FC<AppProps> = ({}) => {
-
     const { data , isLoading } = useQuery('products', fetchProducts, {refetchOnWindowFocus: false})
 
 
