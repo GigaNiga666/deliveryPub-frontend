@@ -34,7 +34,9 @@ const Cart: FC<CartProps> = ({}) => {
             tg.BackButton.hide()
             tg.MainButton.offClick(invoice)
         })
+        tg.MainButton.disable()
         tg.MainButton.onClick(invoice)
+        tg.MainButton.enable()
     }, [])
 
     useEffect(() => {
