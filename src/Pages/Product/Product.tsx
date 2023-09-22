@@ -35,7 +35,6 @@ const Product: FC = () => {
         setCounter(prev => prev === 0 && value === -1 ? 0 : prev + value)
         value === 1 ? addFromCart(product) : removeFromCart(product.id)
     }
-
     return (
         <div className={styles.product}>
             <div className={styles.productImage}>
