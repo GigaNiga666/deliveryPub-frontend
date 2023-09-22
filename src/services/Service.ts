@@ -9,15 +9,20 @@ interface IProductsRes {
     categories : ICategory[]
 }
 
+interface IInvoiceLink {
+    label : string,
+    price : number
+}
+
 export const Service =  {
     async getAllProducts() : Promise<AxiosResponse<IProductsRes>> {
         return await axios.get<IProductsRes, AxiosResponse<IProductsRes>>(`${backendLink}/api/getProducts`)
     },
     async getProduct(id : number) : Promise<AxiosResponse<IProduct>>  {
-        return await  axios.get<IProduct, AxiosResponse<IProduct>>(`${backendLink}/api/getProduct/${id}`)
+        return await axios.get<IProduct, AxiosResponse<IProduct>>(`${backendLink}/api/getProduct/${id}`)
     },
-    async getInvoiceLink() : Promise<string> {
-        const {data} = await axios.post<string,AxiosResponse<string>>(`${backendLink}/api/getInvoiceLink`)
+    async getInvoiceLink(products : IInvoiceLink[]) : Promise<string> {
+        const {data} = await axios.post<string,AxiosResponse<string>>(`${backendLink}/api/getInvoiceLink`, products)
         return data
     }
 }
