@@ -12,8 +12,7 @@ const Delivery = () => {
     const navigate = useNavigate()
 
     function buy() {
-        Service.sendQuery(queryId as string)
-        tg.close()
+        Service.sendQuery(queryId as string).then(() => tg.close())
     }
 
     useEffect(() => {
