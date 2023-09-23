@@ -9,11 +9,6 @@ interface IProductsRes {
     categories : ICategory[]
 }
 
-interface IInvoiceLink {
-    label : string,
-    price : number
-}
-
 export const Service =  {
     async getAllProducts() : Promise<AxiosResponse<IProductsRes>> {
         return await axios.get<IProductsRes, AxiosResponse<IProductsRes>>(`${backendLink}/api/getProducts`)
