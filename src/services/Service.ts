@@ -22,7 +22,7 @@ export const Service =  {
         let finalPrice = 0;
 
         cart.forEach(order => {
-            request.order.push({name : order.product.title, style : order.product.style_name})
+            request.order.push({name : order.product.title, style : order.product.style_name, amount : order.count})
             finalPrice += order.product.price * order.count
         })
 
