@@ -98,18 +98,18 @@ const Delivery = () => {
                 <div className={styles.input}><input onInput={removeError} type="tel" onKeyPress={validateTel} id='inputTel' placeholder='Телефон'/></div>
                 <div className={styles.input}><input onInput={removeError} type="text" id='inputAddress' placeholder='Адрес'/></div>
             </div>
-            <fieldset className={styles.radioWrapper}>
+            <div className={styles.radioWrapper}>
                 <label className={styles.radioLabel}>
                     <input className={styles.radio} type="radio" name="format" checked value="наличные"/>
                     <span className={styles.customRadio}></span>
-                    <span>Наличными</span>
+                    <span>Наличные</span>
                 </label>
                 <label className={styles.radioLabel}>
-                    <input className={styles.radio} type="radio" name="format"  value="безнал"/>
+                    <input className={styles.radio} type="radio" name="format" checked value="безнал"/>
                     <span className={styles.customRadio}></span>
-                    <span>Безналичными</span>
+                    <span>Безнал</span>
                 </label>
-            </fieldset>
+            </div>
             <textarea placeholder='Комментарий к заказу...' id='inputCom' className={styles.textArea}></textarea>
         </div>
     );

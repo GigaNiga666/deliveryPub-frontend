@@ -15,6 +15,7 @@ const Cart = ({}) => {
     const [cartState, setCartState] = useState<{product : IProduct, count : number}[]>(cart)
 
     function delivery() {
+        tg.showAlert('Вот')
         navigate('/form')
         tg.MainButton.offClick(delivery)
     }
