@@ -13,7 +13,7 @@ const App = ({}) => {
 
     const [searchInput, setSearchInput] = useState<string>('')
     const [currentCategory, setCategory] = useState<string>('')
-    const [currentClass, setCurrentClass] = useState<string>('Пиво')
+    const [currentClass, setCurrentClass] = useState<string>('Напитки')
     const {tg} = useTelegram()
     const navigate = useNavigate()
 
@@ -71,11 +71,11 @@ const App = ({}) => {
             <div className={styles.products}>
                 <div className={styles.container}>
                     <div className={styles.buttonsProducts}>
-                        <button className={`${styles.buttonProduct} ${currentClass === 'Пиво' ? styles.active : ''}`} onClick={() => setCurrentClass('Пиво')}>
+                        <button className={`${styles.buttonProduct} ${currentClass === 'Напитки' ? styles.active : ''}`} onClick={() => setCurrentClass('Напитки')}>
                             <svg className={styles.buttonIcon}>
                                 <use xlinkHref={`${sprite}#beer`}/>
                             </svg>
-                            <span>Пиво</span>
+                            <span>Напитки</span>
                         </button>
                         <button className={`${styles.buttonProduct} ${currentClass === 'Еда' ? styles.active : ''}`} onClick={() => setCurrentClass('Еда')}>
                             <svg className={styles.buttonIcon}>
