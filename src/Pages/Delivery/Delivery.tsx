@@ -7,7 +7,7 @@ import {useCart} from "../../hooks/useCart";
 
 const Delivery = () => {
 
-    const {tg, queryId} = useTelegram()
+    const {tg, queryId, user} = useTelegram()
     const {cart} = useCart()
     const navigate = useNavigate()
 
@@ -62,7 +62,7 @@ const Delivery = () => {
         }
 
         tg.MainButton.disable()
-        Service.sendQuery(queryId as string, cart, delivery).then(() => tg.close())
+        Service.sendQuery(queryId as string, cart, delivery, user?.id as number).then(() => tg.close())
     }
 
     function removeError(e : FormEvent<HTMLInputElement>) {
