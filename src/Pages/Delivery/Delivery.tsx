@@ -13,7 +13,7 @@ const Delivery = () => {
 
     function buy() {
         tg.MainButton.disable()
-        Service.sendQuery(queryId as string).then(() => tg.close())
+        Service.sendQuery(queryId as string, cart).then(() => tg.close())
     }
 
     useEffect(() => {

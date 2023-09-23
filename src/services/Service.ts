@@ -16,7 +16,18 @@ export const Service =  {
     async getProduct(id : number) : Promise<AxiosResponse<IProduct>>  {
         return await axios.get<IProduct, AxiosResponse<IProduct>>(`${backendLink}/api/getProduct/${id}`)
     },
-    async sendQuery(query : string) : Promise<void> {
-        await axios.post<void,AxiosResponse<void>>(`${backendLink}/api/webAppQuery`, {queryId : query})
+    async sendQuery(query : string, cart : {product : IProduct, count : number}[]) : Promise<void> {
+        const request = {queryId : query, order : []}
+
+        let finalPrice = 0;
+
+        cart.forEach(order => {
+            request.order.push({name : order.product.title, style : order.product.style_name})
+            finalPrice += order.product.price * order.count
+        })
+
+        request.price = finalPrice
+
+        await axios.post<void,AxiosResponse<void>>(`${backendLink}/api/webAppQuery`, request)
     }
 }
