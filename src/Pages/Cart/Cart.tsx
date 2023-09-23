@@ -5,7 +5,6 @@ import {OrderCard} from "../../components/OrderCard/OrderCard";
 import {useTelegram} from "../../hooks/useTelegram";
 import {useNavigate} from "react-router-dom";
 import {IProduct} from "../../types/IProduct";
-import {Service} from "../../services/Service";
 
 const Cart = ({}) => {
 
