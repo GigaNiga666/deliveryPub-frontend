@@ -3,10 +3,12 @@ import {useTelegram} from "../../hooks/useTelegram";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {Service} from "../../services/Service";
+import {useCart} from "../../hooks/useCart";
 
 const Delivery = () => {
 
     const {tg, queryId} = useTelegram()
+    const {cart} = useCart()
     const navigate = useNavigate()
 
     function buy() {
