@@ -26,18 +26,9 @@ const Cart = ({}) => {
             tg.BackButton.hide()
             tg.MainButton.offClick(delivery)
         })
+        tg.MainButton.text = 'Перейти к оформлению'
         tg.MainButton.onClick(delivery)
     }, [])
-
-    useEffect(() => {
-        let finalPrice = 0;
-
-        cart.forEach(order => {
-            finalPrice += order.product.price * order.count
-        })
-
-        tg.MainButton.text = 'Оплатить ' + finalPrice
-    }, [cartState])
 
 
     return (

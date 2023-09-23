@@ -21,8 +21,7 @@ export const Service =  {
     async getProduct(id : number) : Promise<AxiosResponse<IProduct>>  {
         return await axios.get<IProduct, AxiosResponse<IProduct>>(`${backendLink}/api/getProduct/${id}`)
     },
-    async getInvoiceLink(products : IInvoiceLink[]) : Promise<string> {
-        const {data} = await axios.post<string,AxiosResponse<string>>(`${backendLink}/api/getInvoiceLink`, products)
-        return data
+    async sendQuery(query : string) : Promise<void> {
+        await axios.post<void,AxiosResponse<void>>(`${backendLink}/api/webAppQuery`, query)
     }
 }

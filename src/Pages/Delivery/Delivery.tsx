@@ -2,14 +2,16 @@ import styles from './Delivery.module.scss'
 import {useTelegram} from "../../hooks/useTelegram";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import {Service} from "../../services/Service";
 
 const Delivery = () => {
 
-    const {tg} = useTelegram()
+    const {tg, queryId} = useTelegram()
     const navigate = useNavigate()
 
     function buy() {
-
+        Service.sendQuery(queryId as string)
+        tg.close()
     }
 
     useEffect(() => {
@@ -20,6 +22,14 @@ const Delivery = () => {
             tg.MainButton.offClick(buy)
         })
         tg.MainButton.onClick(buy)
+
+        let finalPrice = 0;
+
+        cart.forEach(order => {
+            finalPrice += order.product.price * order.count
+        })
+
+        tg.MainButton.text = 'Закончить. Сумма оплаты: ' + finalPrice
     }, [])
 
     return (
