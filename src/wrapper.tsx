@@ -3,10 +3,11 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {App} from "./Pages/App/App";
 import {Product} from "./Pages/Product/Product";
 import {Cart} from "./Pages/Cart/Cart";
+import {Delivery} from "./Pages/Delivery/Delivery";
 
 const queryClient = new QueryClient()
 
-const Index = ({}) => {
+const Wrapper = ({}) => {
     return (
         <QueryClientProvider client={queryClient}>
             <BrowserRouter>
@@ -14,10 +15,11 @@ const Index = ({}) => {
                     <Route element={<App/>} path='/'/>
                     <Route element={<Product/>} path='/:id'/>
                     <Route element={<Cart/>} path='/cart'/>
+                    <Route element={<Delivery/>} path='/form'/>
                 </Routes>
             </BrowserRouter>
         </QueryClientProvider>
     );
 };
 
-export {Index};
+export {Wrapper};

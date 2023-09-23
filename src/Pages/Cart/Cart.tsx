@@ -15,16 +15,9 @@ const Cart = ({}) => {
 
     const [cartState, setCartState] = useState<{product : IProduct, count : number}[]>(cart)
 
-    async function invoice() {
-        const products : {label : string, price : number}[] = [];
-
-        cart.forEach(order => {
-            products.push({label : order.product.title, price : order.product.price * order.count * 100})
-        })
-        tg.MainButton.disable()
-        const link = await Service.getInvoiceLink(products)
-        tg.MainButton.enable()
-        await tg.openInvoice(link)
+    function delivery() {
+        navigate('/form')
+        tg.MainButton.offClick(delivery)
     }
 
     useEffect(() => {
@@ -32,9 +25,9 @@ const Cart = ({}) => {
         tg.BackButton.onClick(() => {
             navigate('/')
             tg.BackButton.hide()
-            tg.MainButton.offClick(invoice)
+            tg.MainButton.offClick(delivery)
         })
-        tg.MainButton.onClick(invoice)
+        tg.MainButton.onClick(delivery)
     }, [])
 
     useEffect(() => {
