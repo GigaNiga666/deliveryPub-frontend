@@ -12,6 +12,7 @@ const Delivery = () => {
     const navigate = useNavigate()
 
     function buy() {
+        tg.MainButton.disable()
         Service.sendQuery(queryId as string).then(() => tg.close())
     }
 
