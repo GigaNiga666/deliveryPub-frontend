@@ -95,7 +95,7 @@ const Delivery = () => {
             <h2 className={styles.title}>Доставка</h2>
             <div className={styles.wrapper}>
                 <div className={styles.input}><input onInput={removeError} type="text" id='inputName' placeholder='Имя'/></div>
-                <div className={styles.input}><input onInput={removeError} type="tel" onKeyPress={validateTel} onKe id='inputTel' placeholder='Телефон'/></div>
+                <div className={styles.input}><input onInput={removeError} type="tel" onKeyPress={validateTel} id='inputTel' placeholder='Телефон'/></div>
                 <div className={styles.input}><input onInput={removeError} type="text" id='inputAddress' placeholder='Адрес'/></div>
             </div>
             <fieldset className={styles.radioWrapper}>
