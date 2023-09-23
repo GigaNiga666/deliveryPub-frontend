@@ -1,6 +1,6 @@
 import styles from './Delivery.module.scss'
 import {useTelegram} from "../../hooks/useTelegram";
-import {useEffect, useRef} from "react";
+import {FormEvent, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {Service} from "../../services/Service";
 import {useCart} from "../../hooks/useCart";
@@ -10,27 +10,66 @@ const Delivery = () => {
     const {tg, queryId} = useTelegram()
     const {cart} = useCart()
     const navigate = useNavigate()
-    const name = useRef<HTMLInputElement>(null)
-    const tel = useRef<HTMLInputElement>(null)
-    const address = useRef<HTMLInputElement>(null)
-    const nal = useRef<HTMLInputElement>(null)
-    const beznal = useRef<HTMLInputElement>(null)
-    const com = useRef<HTMLTextAreaElement>(null)
+
+    function validation() {
+        const allInputs = document.querySelectorAll('input');
+        let result = true
+
+        for (const input of allInputs) {
+            if (input.value === '') {
+                result = false
+                input.classList.add('error-validation')
+                const parent = input.parentNode;
+                if (!parent?.querySelector('.error-label')) {
+                    const errorLabel = document.createElement('label')
+                    errorLabel.classList.add('error-label')
+                    errorLabel.textContent = 'Поле не заполнено!'
+                    parent?.append(errorLabel)
+                }
+            }
+        }
+
+        return result
+    }
+
+    function validateTel(evt : any) {
+        let theEvent = evt;
+        let key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode( key );
+        let regex = /[0-9]|\+/;
+        if( !regex.test(key) ) {
+            theEvent.returnValue = false;
+            if(theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
 
     function buy() {
 
-        if (!name.current || !tel.current || !address.current || !nal.current || !beznal.current || !com.current) return
+        if (!validation()) return
+
+        const name = document.querySelector('#inputName') as HTMLInputElement
+        const tel = document.querySelector('#inputTel') as HTMLInputElement
+        const address = document.querySelector('#inputAddress') as HTMLInputElement
+        const com = document.querySelector('#inputCom') as HTMLInputElement
+        const paymentType = document.querySelector('input[type="radio"]:checked') as HTMLInputElement
 
         const delivery = {
-            name : name.current.value,
-            telephone : tel.current.value,
-            address : address.current.value,
-            paymentType : nal.current?.checked ? nal.current?.value : beznal.current?.value,
-            com : com.current.value
+            name : name.value as string,
+            telephone : tel.value as string,
+            address : address.value as string,
+            paymentType : paymentType.value as string,
+            com : com.value as string
         }
 
         tg.MainButton.disable()
         Service.sendQuery(queryId as string, cart, delivery).then(() => tg.close())
+    }
+
+    function removeError(e : FormEvent<HTMLInputElement>) {
+        if (e.currentTarget.classList.contains('error-validation')){
+            e.currentTarget.classList.remove('error-validation')
+            e.currentTarget.parentNode?.querySelector('.error-label')?.remove()
+        }
     }
 
     useEffect(() => {
@@ -55,23 +94,23 @@ const Delivery = () => {
         <div className={styles.form}>
             <h2 className={styles.title}>Доставка</h2>
             <div className={styles.wrapper}>
-                <input ref={name} type="text" className={styles.input} placeholder='Имя'/>
-                <input ref={tel} type="tel" className={styles.input} placeholder='Телефон'/>
-                <input ref={address} type="text" className={styles.input} placeholder='Адрес'/>
+                <div className={styles.input}><input onInput={removeError} type="text" id='inputName' placeholder='Имя'/></div>
+                <div className={styles.input}><input onInput={removeError} type="text" onKeyPress={validateTel} id='inputTel' placeholder='Телефон'/></div>
+                <div className={styles.input}><input onInput={removeError} type="text" id='inputAddress' placeholder='Адрес'/></div>
             </div>
             <fieldset className={styles.radioWrapper}>
                 <label className={styles.radioLabel}>
-                    <input ref={nal} className={styles.radio} type="radio" name="format" checked value="наличные"/>
+                    <input className={styles.radio} type="radio" name="format" checked value="наличные"/>
                     <span className={styles.customRadio}></span>
                     <span>Наличными</span>
                 </label>
                 <label className={styles.radioLabel}>
-                    <input ref={beznal} className={styles.radio} type="radio" name="format"  value="безнал"/>
+                    <input className={styles.radio} type="radio" name="format"  value="безнал"/>
                     <span className={styles.customRadio}></span>
                     <span>Безналичными</span>
                 </label>
             </fieldset>
-            <textarea ref={com} placeholder='Комментарий к заказу...' className={styles.textArea}></textarea>
+            <textarea placeholder='Комментарий к заказу...' id='inputCom' className={styles.textArea}></textarea>
         </div>
     );
 };

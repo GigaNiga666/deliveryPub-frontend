@@ -82,3 +82,11 @@ body {
     overflow-x: hidden;
     overflow-y: scroll;
 }
+
+.error-validation {
+    border-color: red !important;
+}
+
+.error-label {
+    color: red;
+}
