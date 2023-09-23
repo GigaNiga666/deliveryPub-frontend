@@ -17,6 +17,6 @@ export const Service =  {
         return await axios.get<IProduct, AxiosResponse<IProduct>>(`${backendLink}/api/getProduct/${id}`)
     },
     async sendQuery(query : string) : Promise<void> {
-        await axios.post<void,AxiosResponse<void>>(`${backendLink}/api/webAppQuery`, query)
+        await axios.post<void,AxiosResponse<void>>(`${backendLink}/api/webAppQuery`, {queryId : query})
     }
 }
