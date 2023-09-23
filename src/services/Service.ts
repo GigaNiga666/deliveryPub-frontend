@@ -11,9 +11,12 @@ interface IProductsRes {
 
 interface IWebQueryReq {
     queryId : string,
-    order : {name : string, style : string, amount : number}[],
-    price : number
+    order : {name : string, amount : number}[],
+    price : number,
+    delivery : IDelivery
 }
+
+interface IDelivery { name : string, telephone : string, address : string, paymentType : string, com : string}
 
 export const Service =  {
     async getAllProducts() : Promise<AxiosResponse<IProductsRes>> {
@@ -22,13 +25,13 @@ export const Service =  {
     async getProduct(id : number) : Promise<AxiosResponse<IProduct>>  {
         return await axios.get<IProduct, AxiosResponse<IProduct>>(`${backendLink}/api/getProduct/${id}`)
     },
-    async sendQuery(query : string, cart : {product : IProduct, count : number}[]) : Promise<void> {
-        const request : IWebQueryReq  = {queryId : query, order : [], price : 0}
+    async sendQuery(query : string, cart : {product : IProduct, count : number}[], delivery : IDelivery) : Promise<void> {
+        const request : IWebQueryReq  = {queryId : query, order : [], price : 0, delivery}
 
         let finalPrice = 0;
 
         cart.forEach(order => {
-            request.order.push({name : order.product.title, style : order.product.style_name, amount : order.count})
+            request.order.push({name : order.product.title, amount : order.count})
             finalPrice += order.product.price * order.count
         })
 
