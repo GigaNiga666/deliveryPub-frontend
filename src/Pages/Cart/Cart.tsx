@@ -15,20 +15,19 @@ const Cart = ({}) => {
     const [cartState, setCartState] = useState<{product : IProduct, count : number}[]>(cart)
 
     function delivery() {
-        tg.showAlert('Вот')
         navigate('/form')
         tg.MainButton.offClick(delivery)
     }
 
     useEffect(() => {
+        tg.MainButton.text = 'Перейти к оформлению'
+        tg.MainButton.onClick(delivery)
         tg.BackButton.show()
         tg.BackButton.onClick(() => {
             navigate('/')
             tg.BackButton.hide()
             tg.MainButton.offClick(delivery)
         })
-        tg.MainButton.text = 'Перейти к оформлению'
-        tg.MainButton.onClick(delivery)
     }, [])
 
 
