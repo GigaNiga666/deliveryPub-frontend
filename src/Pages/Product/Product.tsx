@@ -30,7 +30,7 @@ const Product: FC = () => {
     if (!response) return (<span>Данные по неизвестной причине отсутствуют</span>)
 
     const product = response.data
-    const isAlcohol : boolean = product.alcohol_percent
+    const isAlcohol : boolean = !!product.alcohol_percent
 
     function counterClick(value : number) {
         setCounter(prev => prev === 0 && value === -1 ? 0 : prev + value)
