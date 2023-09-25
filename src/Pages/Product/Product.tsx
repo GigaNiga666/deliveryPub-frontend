@@ -30,6 +30,7 @@ const Product: FC = () => {
     if (!response) return (<span>Данные по неизвестной причине отсутствуют</span>)
 
     const product = response.data
+    const isAlcohol : boolean = product.alcohol_percent
 
     function counterClick(value : number) {
         setCounter(prev => prev === 0 && value === -1 ? 0 : prev + value)
@@ -46,7 +47,11 @@ const Product: FC = () => {
                     <h2 className={styles.breweryName}>{product.brewery_name}</h2>
                 </div>
                 <div className={styles.features}>
-                    {product.alcohol_percent}% ABV | {product.liter} Liter | {product.bitterness} IBU | {product.country} | {product.style_name}
+                    {
+                        isAlcohol ? `${product.alcohol_percent}% ABV | ${product.volume} Liter | ${product.bitterness} IBU | ${product.country} | ${product.style_name}` :
+                            `${product.volume}g`
+                    }
+
                 </div>
                 <div className={styles.numbers}>
                     <span className={styles.price}>₽{product.price}</span>
@@ -57,6 +62,13 @@ const Product: FC = () => {
                     </div>
                 </div>
                 <div className={styles.text}>
+                    {
+                        isAlcohol &&
+                        <p className={styles.compound}>
+                          <span className={styles.descriptionTitle}>Состав:</span>
+                            {product.compound}
+                        </p>
+                    }
                     <span className={styles.descriptionTitle}>Описание</span>
                     <p className={styles.descriptionText}>
                         {product.description}
