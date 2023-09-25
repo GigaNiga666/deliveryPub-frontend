@@ -92,7 +92,7 @@ const App = ({}) => {
                         <button onClick={() => setCategory('')} className={!currentCategory ? styles.navigationItemActive : ''}>Все</button>
                     </li>
                     {
-                        response.data.categories.map(category => (
+                        response.data.categories.filter(category => category.class_title === currentClass).map(category => (
                             <li key={category.id} className={styles.navigationItem}>
                                 <button
                                     onClick={() => setCategory(category.category_title)}
