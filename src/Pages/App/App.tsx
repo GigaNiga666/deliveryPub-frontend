@@ -71,13 +71,19 @@ const App = ({}) => {
             <div className={styles.products}>
                 <div className={styles.container}>
                     <div className={styles.buttonsProducts}>
-                        <button className={`${styles.buttonProduct} ${currentClass === 'Напитки' ? styles.active : ''}`} onClick={() => setCurrentClass('Напитки')}>
+                        <button className={`${styles.buttonProduct} ${currentClass === 'Напитки' ? styles.active : ''}`} onClick={() => {
+                            setCurrentClass('Напитки')
+                            setCategory('')
+                        }}>
                             <svg className={styles.buttonIcon}>
                                 <use xlinkHref={`${sprite}#beer`}/>
                             </svg>
                             <span>Напитки</span>
                         </button>
-                        <button className={`${styles.buttonProduct} ${currentClass === 'Еда' ? styles.active : ''}`} onClick={() => setCurrentClass('Еда')}>
+                        <button className={`${styles.buttonProduct} ${currentClass === 'Еда' ? styles.active : ''}`} onClick={() => {
+                            setCurrentClass('Еда')
+                            setCategory('')
+                        }}>
                             <svg className={styles.buttonIcon}>
                                 <use xlinkHref={`${sprite}#food`}/>
                             </svg>
