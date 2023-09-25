@@ -21,7 +21,6 @@ const App = ({}) => {
         if (!tg.isExpanded) tg.expand()
     })
 
-
     function clickOnMainBtn() {
         navigate('/cart')
         tg.MainButton.offClick(clickOnMainBtn)

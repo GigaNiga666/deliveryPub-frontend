@@ -49,7 +49,7 @@ const Product: FC = () => {
                 <div className={styles.features}>
                     {
                         isAlcohol ? `${product.alcohol_percent}% ABV | ${product.volume} Liter | ${product.bitterness} IBU | ${product.country} | ${product.style_name}` :
-                            `${product.volume}${product.class === 'Напитки' ? ' Liter' : 'g'}`
+                            `${product.volume}${product.class === 'Еда' ? 'g' : ' Liter'}`
                     }
 
                 </div>
