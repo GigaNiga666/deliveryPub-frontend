@@ -32,8 +32,6 @@ const Product: FC = () => {
     const product = response.data
     const isAlcohol : boolean = !!product.alcohol_percent
 
-    console.log(product.class)
-
     function counterClick(value : number) {
         setCounter(prev => prev === 0 && value === -1 ? 0 : prev + value)
         value === 1 ? addFromCart(product) : removeFromCart(product.id)
