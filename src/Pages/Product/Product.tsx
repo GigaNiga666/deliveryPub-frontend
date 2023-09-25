@@ -63,7 +63,7 @@ const Product: FC = () => {
                 </div>
                 <div className={styles.text}>
                     {
-                        isAlcohol &&
+                        !isAlcohol &&
                         <p className={styles.compound}>
                           <span className={styles.descriptionTitle}>Состав:</span>
                             {product.compound}
