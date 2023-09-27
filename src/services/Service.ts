@@ -4,7 +4,7 @@ import {ICategory} from "../types/ICategory";
 
 const backendLink = import.meta.env.VITE_BACKEND_URL
 
-interface IProductsRes {
+export interface IProductsRes {
     products : IProduct[],
     categories : ICategory[]
 }
@@ -39,5 +39,27 @@ export const Service =  {
         request.price = finalPrice
 
         await axios.post<void,AxiosResponse<void>>(`${backendLink}/api/webAppQuery`, request)
-    }
+    },
+    async adminAuth(username : string, password : string) : Promise<boolean> {
+        const {data} = await axios.post<boolean,AxiosResponse<boolean>>(`${backendLink}/api/adminAuth`, {username, password})
+        return data
+    },
+    async createProduct(formData : FormData) {
+        return await axios.post(`${backendLink}/api/createProduct`, formData)
+    },
+    async updateProduct(formData : FormData) {
+        return await axios.post(`${backendLink}/api/updateProduct`, formData)
+    },
+    async deleteProduct(id : number) {
+        return await axios.post(`${backendLink}/api/deleteProduct`, {id})
+    },
+    async createCategory(data : {category_title : string, class_title : string}) {
+        return await axios.post(`${backendLink}/api/createCategory`, {category_title : data.category_title, class_title: data.class_title})
+    },
+    async updateCategory(data : {category_title : string, class_title : string, id : number}) {
+        return await axios.post(`${backendLink}/api/updateCategory`, {category_title : data.category_title, class_title: data.class_title, id : data.id})
+    },
+    async deleteCategory(id : number) {
+        return await axios.post(`${backendLink}/api/deleteCategory`, {id})
+    },
 }

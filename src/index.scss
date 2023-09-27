@@ -81,6 +81,10 @@ body {
     font-family: 'Jost', sans-serif;
     overflow-x: hidden;
     overflow-y: scroll;
+
+    &.nosroll {
+        overflow-y: hidden;
+    }
 }
 
 .error-validation {
@@ -89,4 +93,20 @@ body {
 
 .error-label {
     color: red;
+}
+
+input[type="text"], input[type="password"] {
+    background: #fff;
+    border: 1px solid #F2F2F3;
+    border-radius: 8px;
+    padding: 8px 12px;
+    width: 100%;
+    height: 40px;
+    line-height: 130%;
+    font-size: 16px;
+    transition: border 0.2s ease-in-out;
+
+    &:focus-visible {
+        border: 1px solid #1F1F1F;
+    }
 }

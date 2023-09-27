@@ -4,6 +4,7 @@ import {App} from "./Pages/App/App";
 import {Product} from "./Pages/Product/Product";
 import {Cart} from "./Pages/Cart/Cart";
 import {Delivery} from "./Pages/Delivery/Delivery";
+import {Admin} from "./Pages/Admin/Admin";
 
 const queryClient = new QueryClient()
 
@@ -16,6 +17,7 @@ const Wrapper = ({}) => {
                     <Route element={<Product/>} path='/:id'/>
                     <Route element={<Cart/>} path='/cart'/>
                     <Route element={<Delivery/>} path='/form'/>
+                    <Route element={<Admin/>} path='/admin'/>
                 </Routes>
             </BrowserRouter>
         </QueryClientProvider>

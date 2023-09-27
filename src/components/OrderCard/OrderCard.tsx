@@ -23,7 +23,7 @@ const OrderCard: FC<OrderCardProps> = ({order, update}) => {
 
     return (
         <li className={styles.card}>
-            <img src={`./images/${order.product.image}`} alt="" className={styles.image}/>
+            <img src={`${import.meta.env.VITE_BACKEND_URL}/client/public/${order.product.image}`} alt="" className={styles.image}/>
             <div className={styles.content}>
                 <span className={styles.title}>{order.product.title}</span>
                 <span className={styles.breweryName}>{order.product.brewery_name}</span>

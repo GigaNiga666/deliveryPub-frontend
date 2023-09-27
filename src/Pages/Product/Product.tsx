@@ -39,7 +39,7 @@ const Product: FC = () => {
     return (
         <div className={styles.product}>
             <div className={styles.productImage}>
-                <img src={`./images/${product.image}`} alt=""/>
+                <img src={`${import.meta.env.VITE_BACKEND_URL}/client/public/${product.image}`} alt=""/>
             </div>
             <div className={styles.productContent}>
                 <div className={styles.header}>
