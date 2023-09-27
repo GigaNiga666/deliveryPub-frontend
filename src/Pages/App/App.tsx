@@ -5,8 +5,9 @@ import sprite from '../../assets/icons/sprite.svg'
 import {Card} from "../../components/Card/Card";
 import {useQuery} from "react-query";
 import {useTelegram} from "../../hooks/useTelegram";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Service} from "../../services/Service";
+import {Admin} from "../Admin/Admin";
 
 const App = ({}) => {
     const { data : response , isLoading } = useQuery('products', () => Service.getAllProducts(), {refetchOnWindowFocus: false})
@@ -51,6 +52,7 @@ const App = ({}) => {
     return (
         <div className={styles.main}>
             <div className={styles.container}>
+                <Link to={<Admin/>}>Перейти</Link>
                 <img className={styles.logo} src={logo} alt="" />
             </div>
             <div className={styles.search}>
