@@ -17,7 +17,7 @@ const Wrapper = ({}) => {
                     <Route element={<Product/>} path='/:id'/>
                     <Route element={<Cart/>} path='/cart'/>
                     <Route element={<Delivery/>} path='/form'/>
-                    <Route element={<Admin/>} path='/admin'/>
+                    <Route exact element={<Admin/>} path='/admin'/>
                 </Routes>
             </BrowserRouter>
         </QueryClientProvider>
