@@ -12,7 +12,6 @@ const Delivery = () => {
     const navigate = useNavigate()
     const [currentPaymentType, setCurrentPaymentType] = useState<string>('Оплата картой')
 
-
     function validation() {
         const allInputs = document.querySelectorAll('input');
         let result = true
@@ -54,12 +53,13 @@ const Delivery = () => {
         const address = document.querySelector('#inputAddress') as HTMLInputElement
         const com = document.querySelector('#inputCom') as HTMLInputElement
         const surrender = document.querySelector('#inputSurrender') as HTMLInputElement | undefined
+        const paymentType = document.querySelector('input[type="radio"]:checked') as HTMLInputElement
 
         const delivery = {
             name : name.value as string,
             telephone : tel.value as string,
             address : address.value as string,
-            paymentType : currentPaymentType,
+            paymentType : paymentType.value as string,
             surrender : surrender ? surrender.value : null,
             com : com.value as string
         }
