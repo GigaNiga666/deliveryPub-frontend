@@ -7,7 +7,6 @@ import {useQuery} from "react-query";
 import {useTelegram} from "../../hooks/useTelegram";
 import {Link, useNavigate} from "react-router-dom";
 import {Service} from "../../services/Service";
-import {Admin} from "../Admin/Admin";
 
 const App = ({}) => {
     const { data : response , isLoading } = useQuery('products', () => Service.getAllProducts(), {refetchOnWindowFocus: false})
@@ -52,7 +51,7 @@ const App = ({}) => {
     return (
         <div className={styles.main}>
             <div className={styles.container}>
-                <Link to={<Admin/>}>Перейти</Link>
+                <Link to={'/admin'}>Перейти</Link>
                 <img className={styles.logo} src={logo} alt="" />
             </div>
             <div className={styles.search}>
