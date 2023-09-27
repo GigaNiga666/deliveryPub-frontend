@@ -109,7 +109,7 @@ const Delivery = () => {
                     <span>Оплата картой</span>
                 </label>
                 <label className={styles.radioLabel}>
-                    <input className={styles.radio} type="radio" name="format" defaultChecked={false} onClick={() => setCurrentPaymentType('nal')} value="наличные"/>
+                    <input className={styles.radio} type="radio" name="format" defaultChecked={false} onClick={() => setCurrentPaymentType('nal')} value="Наличные"/>
                     <span className={styles.customRadio}></span>
                     <span>Наличные</span>
                 </label>
