@@ -103,12 +103,12 @@ const Delivery = () => {
             </div>
             <div className={styles.radioWrapper}>
                 <label className={styles.radioLabel}>
-                    <input className={styles.radio} type="radio" name="format" defaultChecked={true} onClick={() => setCurrentPaymentType('Наличные')} value="Оплата картой"/>
+                    <input className={styles.radio} type="radio" name="format" defaultChecked={true} onClick={() => setCurrentPaymentType('Оплата картой')} value="Оплата картой"/>
                     <span className={styles.customRadio}></span>
                     <span>Оплата картой</span>
                 </label>
                 <label className={styles.radioLabel}>
-                    <input className={styles.radio} type="radio" name="format" defaultChecked={false} onClick={() => setCurrentPaymentType('Оплата картой')} value="Наличные"/>
+                    <input className={styles.radio} type="radio" name="format" defaultChecked={false} onClick={() => setCurrentPaymentType('Наличные')} value="Наличные"/>
                     <span className={styles.customRadio}></span>
                     <span>Наличные</span>
                 </label>
