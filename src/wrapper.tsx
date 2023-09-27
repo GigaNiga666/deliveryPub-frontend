@@ -10,7 +10,7 @@ const queryClient = new QueryClient()
 
 const Wrapper = ({}) => {
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
 
     return (
         <QueryClientProvider client={queryClient}>
