@@ -1,6 +1,6 @@
 import styles from './Delivery.module.scss'
 import {useTelegram} from "../../hooks/useTelegram";
-import {FormEvent, useEffect} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {Service} from "../../services/Service";
 import {useCart} from "../../hooks/useCart";
@@ -10,6 +10,8 @@ const Delivery = () => {
     const {tg, queryId, user} = useTelegram()
     const {cart} = useCart()
     const navigate = useNavigate()
+    const [currentPaymentType, setCurrentPaymentType] = useState<string>('beznal')
+
 
     function validation() {
         const allInputs = document.querySelectorAll('input');
@@ -52,12 +54,14 @@ const Delivery = () => {
         const address = document.querySelector('#inputAddress') as HTMLInputElement
         const com = document.querySelector('#inputCom') as HTMLInputElement
         const paymentType = document.querySelector('input[type="radio"]:checked') as HTMLInputElement
+        const surrender = document.querySelector('#inputSurrender') as HTMLInputElement | undefined
 
         const delivery = {
             name : name.value as string,
             telephone : tel.value as string,
             address : address.value as string,
             paymentType : paymentType.value as string,
+            surrender : surrender ? surrender.value : null,
             com : com.value as string
         }
 
@@ -100,16 +104,17 @@ const Delivery = () => {
             </div>
             <div className={styles.radioWrapper}>
                 <label className={styles.radioLabel}>
-                    <input className={styles.radio} type="radio" name="format" checked value="наличные"/>
+                    <input className={styles.radio} type="radio" name="format" defaultChecked={true} onClick={() => setCurrentPaymentType('beznal')} value="Оплата картой"/>
+                    <span className={styles.customRadio}></span>
+                    <span>Оплата картой</span>
+                </label>
+                <label className={styles.radioLabel}>
+                    <input className={styles.radio} type="radio" name="format" defaultChecked={false} onClick={() => setCurrentPaymentType('nal')} value="наличные"/>
                     <span className={styles.customRadio}></span>
                     <span>Наличные</span>
                 </label>
-                <label className={styles.radioLabel}>
-                    <input className={styles.radio} type="radio" name="format" checked value="безнал"/>
-                    <span className={styles.customRadio}></span>
-                    <span>Безнал</span>
-                </label>
             </div>
+            {currentPaymentType === 'nal' ? <div className={styles.input}><input onInput={removeError} id='inputSurrender' type="tel" onKeyPress={validateTel} placeholder='Сдача с ...'/></div> : null}
             <textarea placeholder='Комментарий к заказу...' id='inputCom' className={styles.textArea}></textarea>
         </div>
     );

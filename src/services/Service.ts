@@ -17,7 +17,7 @@ interface IWebQueryReq {
     userLink : string
 }
 
-interface IDelivery { name : string, telephone : string, address : string, paymentType : string, com : string}
+interface IDelivery { name : string, telephone : string, address : string, paymentType : string, com : string, surrender : string | null}
 
 export const Service =  {
     async getAllProducts() : Promise<AxiosResponse<IProductsRes>> {
