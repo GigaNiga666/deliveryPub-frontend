@@ -10,7 +10,7 @@ const Delivery = () => {
     const {tg, queryId, user} = useTelegram()
     const {cart} = useCart()
     const navigate = useNavigate()
-    const [currentPaymentType, setCurrentPaymentType] = useState<string>('beznal')
+    const [currentPaymentType, setCurrentPaymentType] = useState<string>('Оплата картой')
 
 
     function validation() {
