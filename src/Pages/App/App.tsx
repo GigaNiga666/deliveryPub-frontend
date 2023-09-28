@@ -39,12 +39,7 @@ const App = ({}) => {
         return (<span>Идёт загрузка...</span>)
 
     if (!response)
-        return (
-            <>
-                <Link to={'/admin'}>Перейти</Link>
-                <span>Данные по какой-то причине отсутствуют</span>
-            </>
-)
+        return (<span>Данные по какой-то причине отсутствуют</span>)
 
     const products = response.data.products.filter(product => {
         const checkCategory = !currentCategory || product.category === currentCategory
