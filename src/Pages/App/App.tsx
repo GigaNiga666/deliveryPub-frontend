@@ -5,7 +5,7 @@ import sprite from '../../assets/icons/sprite.svg'
 import {Card} from "../../components/Card/Card";
 import {useQuery} from "react-query";
 import {useTelegram} from "../../hooks/useTelegram";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {Service} from "../../services/Service";
 
 const App = ({}) => {
