@@ -39,7 +39,12 @@ const App = ({}) => {
         return (<span>Идёт загрузка...</span>)
 
     if (!response)
-        return (<span>Данные по какой-то причине отсутствуют</span>)
+        return (
+            <>
+                <Link to={'/admin'}>Перейти</Link>
+                <span>Данные по какой-то причине отсутствуют</span>
+            </>
+)
 
     const products = response.data.products.filter(product => {
         const checkCategory = !currentCategory || product.category === currentCategory
@@ -51,7 +56,6 @@ const App = ({}) => {
     return (
         <div className={styles.main}>
             <div className={styles.container}>
-                <Link to={'/admin'}>Перейти</Link>
                 <img className={styles.logo} src={logo} alt="" />
             </div>
             <div className={styles.search}>
