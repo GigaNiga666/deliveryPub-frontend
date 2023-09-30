@@ -28,6 +28,7 @@ export const Service =  {
     },
     async sendQuery(query : string, cart : {product : IProduct, count : number}[], delivery : IDelivery, userId : number) : Promise<void> {
         const request : IWebQueryReq  = {queryId : query, order : [], price : 0, delivery, userId : 12345}
+        console.log(userId)
 
         let finalPrice = 0;
 
