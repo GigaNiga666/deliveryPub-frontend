@@ -40,7 +40,8 @@ export const Service =  {
 
         request.price = finalPrice
 
-        return tg.sendData(request);
+        await tg.sendData(JSON.stringify(request));
+        tg.close()
     },
     async adminAuth(username : string, password : string) : Promise<boolean> {
         const {data} = await axios.post<boolean,AxiosResponse<boolean>>(`${backendLink}/api/adminAuth`, {username, password})
