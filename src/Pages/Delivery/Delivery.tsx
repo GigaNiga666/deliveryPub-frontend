@@ -44,7 +44,7 @@ const Delivery = () => {
         }
     }
 
-    async function buy() {
+    function buy() {
 
         if (!validation()) return
 
