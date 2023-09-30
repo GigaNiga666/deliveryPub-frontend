@@ -64,8 +64,13 @@ const Delivery = () => {
             com : com.value as string
         }
 
-        // const data = Service.sendQuery(cart, delivery)
+        const data = Service.sendQuery(cart, delivery)
 
+        try {
+            tg.sendData(JSON.stringify(data));
+        } catch(e) {
+            tg.showAlert(e)
+        }
         tg.close()
     }
 
