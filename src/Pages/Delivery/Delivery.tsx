@@ -96,7 +96,7 @@ const Delivery = () => {
 
     return (
         <div className={styles.form}>
-            <h2 className={styles.title}>Доставка</h2>
+            <h2 className={styles.title}>Доставка лалалал</h2>
             <div className={styles.wrapper}>
                 <div className={styles.input}><input onInput={removeError} type="text" id='inputName' placeholder='Имя'/></div>
                 <div className={styles.input}><input onInput={removeError} type="tel" onKeyPress={validateTel} id='inputTel' placeholder='Телефон'/></div>
