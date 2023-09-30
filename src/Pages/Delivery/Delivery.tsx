@@ -64,7 +64,6 @@ const Delivery = () => {
             com : com.value as string
         }
 
-        tg.MainButton.disable()
         const data = Service.sendQuery(queryId as string, cart, delivery, user?.username ? `https://t.me/${user.username}` : `https://web.telegram.org/k/#${user?.id}`)
 
         await tg.sendData(JSON.stringify(data));
