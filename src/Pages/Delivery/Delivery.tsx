@@ -44,7 +44,7 @@ const Delivery = () => {
         }
     }
 
-    function buy() {
+    async function buy() {
 
         if (!validation()) return
 
@@ -65,7 +65,10 @@ const Delivery = () => {
         }
 
         tg.MainButton.disable()
-        Service.sendQuery(queryId as string, cart, delivery, user?.username ? `https://t.me/${user.username}` : `https://web.telegram.org/k/#${user?.id}`)
+        const data = Service.sendQuery(queryId as string, cart, delivery, user?.username ? `https://t.me/${user.username}` : `https://web.telegram.org/k/#${user?.id}`)
+
+        await tg.sendData(JSON.stringify(data));
+        tg.close()
     }
 
     function removeError(e : FormEvent<HTMLInputElement>) {
