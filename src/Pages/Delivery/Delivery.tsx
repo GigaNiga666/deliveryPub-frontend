@@ -64,9 +64,7 @@ const Delivery = () => {
             com : com.value as string
         }
 
-        const data = Service.sendQuery(cart, delivery)
-        console.log(data)
-        tg.close()
+        Service.sendQuery(cart, delivery).then(() => tg.close())
     }
 
     function removeError(e : FormEvent<HTMLInputElement>) {
