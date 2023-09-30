@@ -64,7 +64,7 @@ const Delivery = () => {
             com : com.value as string
         }
 
-        const data = Service.sendQuery(cart, delivery)
+        // const data = Service.sendQuery(cart, delivery)
 
         tg.close()
     }
