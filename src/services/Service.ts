@@ -10,9 +10,11 @@ export interface IProductsRes {
 }
 
 interface IWebQueryReq {
+    queryId : string,
     order : {name : string, amount : number}[],
     price : number,
     delivery : IDelivery,
+    userLink : string
 }
 
 interface IDelivery { name : string, telephone : string, address : string, paymentType : string, com : string, surrender : string | null}
@@ -24,8 +26,8 @@ export const Service =  {
     async getProduct(id : number) : Promise<AxiosResponse<IProduct>>  {
         return await axios.get<IProduct, AxiosResponse<IProduct>>(`${backendLink}/api/getProduct/${id}`)
     },
-    async sendQuery(cart : {product : IProduct, count : number}[], delivery : IDelivery) : Promise<IWebQueryReq> {
-        const request : IWebQueryReq  = {order : [], price : 0, delivery}
+    async sendQuery(query : string, cart : {product : IProduct, count : number}[], delivery : IDelivery, userLink : string) : Promise<void> {
+        const request : IWebQueryReq  = {queryId : query, order : [], price : 0, delivery, userLink}
 
         let finalPrice = 0;
 
@@ -36,7 +38,7 @@ export const Service =  {
 
         request.price = finalPrice
 
-        return request
+        await axios.post<void,AxiosResponse<void>>(`${backendLink}/api/webAppQuery`, request)
     },
     async adminAuth(username : string, password : string) : Promise<boolean> {
         const {data} = await axios.post<boolean,AxiosResponse<boolean>>(`${backendLink}/api/adminAuth`, {username, password})

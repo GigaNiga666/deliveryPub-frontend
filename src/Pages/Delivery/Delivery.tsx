@@ -7,7 +7,7 @@ import {useCart} from "../../hooks/useCart";
 
 const Delivery = () => {
 
-    const {tg} = useTelegram()
+    const {tg, queryId, user} = useTelegram()
     const {cart} = useCart()
     const navigate = useNavigate()
     const [currentPaymentType, setCurrentPaymentType] = useState<string>('Оплата картой')
@@ -64,7 +64,8 @@ const Delivery = () => {
             com : com.value as string
         }
 
-        Service.sendQuery(cart, delivery).then(() => tg.close())
+        tg.MainButton.disable()
+        Service.sendQuery(queryId as string, cart, delivery, user?.username ? `https://t.me/${user.username}` : `https://web.telegram.org/k/#${user?.id}`).then(() => tg.close())
     }
 
     function removeError(e : FormEvent<HTMLInputElement>) {
