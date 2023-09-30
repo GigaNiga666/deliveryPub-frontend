@@ -1,8 +1,10 @@
 import axios, {AxiosResponse} from "axios";
 import {IProduct} from "../types/IProduct";
 import {ICategory} from "../types/ICategory";
+import {useTelegram} from "../hooks/useTelegram";
 
 const backendLink = import.meta.env.VITE_BACKEND_URL
+const {tg} = useTelegram()
 
 export interface IProductsRes {
     products : IProduct[],
@@ -38,7 +40,7 @@ export const Service =  {
 
         request.price = finalPrice
 
-        await axios.post<void,AxiosResponse<void>>(`${backendLink}/api/webAppQuery`, request)
+        await tg.sendData(request)
     },
     async adminAuth(username : string, password : string) : Promise<boolean> {
         const {data} = await axios.post<boolean,AxiosResponse<boolean>>(`${backendLink}/api/adminAuth`, {username, password})
