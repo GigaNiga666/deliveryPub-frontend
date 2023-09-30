@@ -14,7 +14,7 @@ interface IWebQueryReq {
     order : {name : string, amount : number}[],
     price : number,
     delivery : IDelivery,
-    userLink : string
+    userLink : number
 }
 
 interface IDelivery { name : string, telephone : string, address : string, paymentType : string, com : string, surrender : string | null}
