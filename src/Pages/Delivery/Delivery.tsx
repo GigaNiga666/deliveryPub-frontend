@@ -65,6 +65,7 @@ const Delivery = () => {
         }
 
         tg.MainButton.disable()
+        tg.showAlert(user?.id)
         Service.sendQuery(queryId as string, cart, delivery, user?.id as number).then(() => tg.close())
     }
 
