@@ -65,7 +65,7 @@ const Delivery = () => {
         }
 
         tg.MainButton.disable()
-        Service.sendQuery(queryId as string, cart, delivery, user?.username ? `https://t.me/${user.username}` : `https://web.telegram.org/k/#${user?.id}`).then(() => tg.close())
+        Service.sendQuery(queryId as string, cart, delivery, user?.id as number).then(() => tg.close())
     }
 
     function removeError(e : FormEvent<HTMLInputElement>) {
