@@ -1,10 +1,8 @@
 import axios, {AxiosResponse} from "axios";
 import {IProduct} from "../types/IProduct";
 import {ICategory} from "../types/ICategory";
-import {useTelegram} from "../hooks/useTelegram";
 
 const backendLink = import.meta.env.VITE_BACKEND_URL
-const {tg} = useTelegram()
 
 export interface IProductsRes {
     products : IProduct[],
