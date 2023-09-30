@@ -27,7 +27,7 @@ export const Service =  {
         return await axios.get<IProduct, AxiosResponse<IProduct>>(`${backendLink}/api/getProduct/${id}`)
     },
     async sendQuery(query : string, cart : {product : IProduct, count : number}[], delivery : IDelivery, userId : number) : Promise<void> {
-        const request : IWebQueryReq  = {queryId : query, order : [], price : 0, delivery, userId : 12345}
+        const request : IWebQueryReq  = {queryId : query, order : [], price : 0, delivery, userId : userId}
         console.log(userId)
 
         let finalPrice = 0;
