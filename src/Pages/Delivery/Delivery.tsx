@@ -65,12 +65,7 @@ const Delivery = () => {
         }
 
         const data = Service.sendQuery(cart, delivery)
-
-        try {
-            tg.sendData(JSON.stringify(data));
-        } catch(e) {
-            tg.showAlert(e)
-        }
+        console.log(data)
         tg.close()
     }
 
