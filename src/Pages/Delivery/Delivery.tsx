@@ -83,7 +83,6 @@ const Delivery = () => {
             tg.MainButton.offClick(buy)
         })
         tg.MainButton.onClick(buy)
-        tg.showAlert(user?.id)
 
         let finalPrice = 0;
 
