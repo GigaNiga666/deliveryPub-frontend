@@ -66,7 +66,6 @@ const Delivery = () => {
 
         const data = Service.sendQuery(cart, delivery)
 
-        await tg.sendData(JSON.stringify(data));
         tg.close()
     }
 
