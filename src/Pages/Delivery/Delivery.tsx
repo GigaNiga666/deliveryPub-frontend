@@ -65,7 +65,6 @@ const Delivery = () => {
         }
 
         tg.MainButton.disable()
-        tg.showAlert(user?.id)
         Service.sendQuery(queryId as string, cart, delivery, user?.id as number).then(() => tg.close())
     }
 
@@ -84,6 +83,7 @@ const Delivery = () => {
             tg.MainButton.offClick(buy)
         })
         tg.MainButton.onClick(buy)
+        tg.showAlert(user?.id)
 
         let finalPrice = 0;
 

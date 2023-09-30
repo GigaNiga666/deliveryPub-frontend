@@ -14,7 +14,7 @@ interface IWebQueryReq {
     order : {name : string, amount : number}[],
     price : number,
     delivery : IDelivery,
-    userLink : number
+    userId : number
 }
 
 interface IDelivery { name : string, telephone : string, address : string, paymentType : string, com : string, surrender : string | null}
@@ -26,8 +26,8 @@ export const Service =  {
     async getProduct(id : number) : Promise<AxiosResponse<IProduct>>  {
         return await axios.get<IProduct, AxiosResponse<IProduct>>(`${backendLink}/api/getProduct/${id}`)
     },
-    async sendQuery(query : string, cart : {product : IProduct, count : number}[], delivery : IDelivery, userLink : number) : Promise<void> {
-        const request : IWebQueryReq  = {queryId : query, order : [], price : 0, delivery, userLink}
+    async sendQuery(query : string, cart : {product : IProduct, count : number}[], delivery : IDelivery, userId : number) : Promise<void> {
+        const request : IWebQueryReq  = {queryId : query, order : [], price : 0, delivery, userId}
 
         let finalPrice = 0;
 
