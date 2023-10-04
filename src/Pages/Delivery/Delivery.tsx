@@ -31,7 +31,7 @@ const Delivery = () => {
                     parent?.append(errorLabel)
                 }
                 if (parent?.querySelector('.tel-label')) {
-                    parent?.querySelector('.tel-label').remove()
+                    parent?.querySelector('.tel-label')?.remove()
                 }
             }
         }
