@@ -16,16 +16,22 @@ const Delivery = () => {
         const allInputs = document.querySelectorAll('input');
         let result = true
 
+
         for (const input of allInputs) {
-            if (input.value === '') {
+            console.log( input.value.match(/^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/))
+            const telValid = input.id === 'inputTel' && input.value.match(/^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/) === null
+            if (input.value === '' || telValid) {
                 result = false
                 input.classList.add('error-validation')
                 const parent = input.parentNode;
                 if (!parent?.querySelector('.error-label')) {
                     const errorLabel = document.createElement('label')
                     errorLabel.classList.add('error-label')
-                    errorLabel.textContent = 'Поле не заполнено!'
+                    errorLabel.textContent = telValid && input.value !== '' ? 'Неккоректный номер телефона' : 'Поле не заполнено!'
                     parent?.append(errorLabel)
+                }
+                if (parent?.querySelector('.tel-label')) {
+                    parent?.querySelector('.tel-label').remove()
                 }
             }
         }
@@ -98,7 +104,20 @@ const Delivery = () => {
             <h2 className={styles.title}>Доставка</h2>
             <div className={styles.wrapper}>
                 <div className={styles.input}><input onInput={removeError} type="text" id='inputName' placeholder='Имя'/></div>
-                <div className={styles.input}><input onInput={removeError} type="tel" onKeyPress={validateTel} id='inputTel' placeholder='Телефон'/></div>
+                <div className={styles.input}><input onInput={removeError} type="tel" onChange={(e) => {
+                    const input = e.currentTarget
+                    const parent = input.parentNode;
+
+                    if (!parent?.querySelector('.tel-label')) {
+                        const errorLabel = document.createElement('label')
+                        errorLabel.classList.add('tel-label')
+                        errorLabel.textContent = 'После заказа мы свяжемся с вами для уточнения информации!'
+                        parent?.append(errorLabel)
+                    }
+                    else if (input.value === '')
+                        parent?.querySelector('.tel-label')?.remove()
+
+                }} onKeyPress={validateTel} id='inputTel' placeholder='Телефон'/></div>
                 <div className={styles.input}><input onInput={removeError} type="text" id='inputAddress' placeholder='Адрес'/></div>
             </div>
             <div className={styles.radioWrapper}>
