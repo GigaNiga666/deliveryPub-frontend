@@ -18,8 +18,7 @@ const Delivery = () => {
 
 
         for (const input of allInputs) {
-            console.log( input.value.match(/^((8|\+7|9)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/))
-            const telValid = input.id === 'inputTel' && input.value.match(/^\+?[78][-\(]?\d{3}\)?-?\d{3}-?\d{2}-?\d{2}$/) === null
+            const telValid = input.id === 'inputTel' && input.value.match(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/) === null
             if (input.value === '' || telValid) {
                 result = false
                 input.classList.add('error-validation')
